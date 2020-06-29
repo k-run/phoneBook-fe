@@ -16,6 +16,7 @@ class ListContacts extends Component {
                                 <th>Number</th>
                                 <th>nickName</th>
                                 <th>Delete</th>
+                                <th>Update</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,6 +28,7 @@ class ListContacts extends Component {
                                         <td>{contact.mobileNumber}</td>
                                         <td>{contact.nickName}</td>
                                         <td><button className="btn btn-warning" onClick={() => this.deleteContactClicked(contact.contactId)}>Delete</button></td>
+                                        <td><button className="btn btn-success" onClick={() => this.updateContactClicked(contact.contactId)}>Update</button></td>
                                         <br></br>
                                         <br></br>
                                         </tr>
@@ -35,6 +37,11 @@ class ListContacts extends Component {
                             }
                         </tbody>
                     </table>
+
+                    <div className = "row">
+                          <button className = "btn btn-success" onClick = {this.addContactsClicked}>Add</button>      
+                    </div>
+
                 </div>
             </div>
         )
@@ -49,6 +56,8 @@ class ListContacts extends Component {
         } 
         this.getAllContacts = this.getAllContacts.bind(this)
         this.deleteContactClicked = this.deleteContactClicked.bind(this)
+        this.updateContactClicked = this.updateContactClicked.bind(this)
+        this.addContactsClicked = this.addContactsClicked.bind(this)
     }
 
     componentDidMount() {
@@ -70,6 +79,14 @@ class ListContacts extends Component {
             this.getAllContacts()
         })
     }
+    
+    updateContactClicked(id) {
+        console.log(`updating id: ${id}`)
+        this.props.history.push(`/contacts/update/${id}`)
+    }
 
+    addContactsClicked() {
+        this.props.history.push(`/contacts/-1`)
+    }
 }
 export default ListContacts
